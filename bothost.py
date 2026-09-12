@@ -73,7 +73,7 @@ def _answer(prompt: str = "", *args, **kwargs) -> str:
     admin_password = _env("ADMIN_PASSWORD", "PANEL_PASSWORD")
     playerok_token = _env("PLAYEROK_TOKEN", "PLAYEROK_JWT")
     playerok_cookies = _env("PLAYEROK_COOKIES")
-    user_agent = _env("PLAYEROK_USER_AGENT", "USER_AGENT")
+    user_agent = _env("PLAYEROK_USER_AGENT", "USER_AGENT", default="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36")
     playerok_proxy = _env("PLAYEROK_PROXY")
     telegram_proxy = _env("TELEGRAM_PROXY")
 
@@ -121,8 +121,6 @@ def _validate_env() -> None:
         missing.append("ADMIN_PASSWORD")
     if not _env("PLAYEROK_TOKEN", "PLAYEROK_JWT", "PLAYEROK_COOKIES"):
         missing.append("PLAYEROK_TOKEN")
-    if not _env("PLAYEROK_USER_AGENT", "USER_AGENT"):
-        missing.append("PLAYEROK_USER_AGENT")
 
     if missing:
         raise SystemExit(
